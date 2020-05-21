@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 const SeedLocations = require('./models/SeedLocations');
 const HiveLocations = require('./models/HiveLocations')
 
-var port = 3000;
+var port = process.ENV.PORT || 3000;
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
