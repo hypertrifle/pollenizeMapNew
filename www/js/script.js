@@ -1,11 +1,20 @@
+
+var addSeedModal = document.getElementById("addSeedModal");
+
+window.onclick = function (event) {
+    if (event.target == addSeedModal) {
+        addSeedModal.style.display = "none";
+    }
+}
+
 var mymap = L.map('mapid').setView([50.37039039587762, -4.142532348632813], 13);
 
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     maxZoom: 18,
-    id: 'chrisboothplymuni/ck6vyoaey085d1iplyo2njs25',
+    id: 'fooldome/ck0xrpybh0rzq1crp6narwuyl',
     tileSize: 512,
     zoomOffset: -1,
-    accessToken: 'pk.eyJ1IjoiY2hyaXNib290aHBseW11bmkiLCJhIjoiY2s2Z3pvcTJjMGM1ZDNkcDg5OG0xMXV1byJ9.1C8-bGFiANy_BxzCNfYA5A'
+    accessToken: 'pk.eyJ1IjoiZm9vbGRvbWUiLCJhIjoiY2pxcHJyb2c1MDBzajQzbzZoM2dlaHRkeiJ9.CDXrbrpZqfi6A5bg5mX9TA'
 }).addTo(mymap);
 
 
@@ -24,6 +33,8 @@ function onMapClick(e) {
         .then((myJson) => {
             w3wField.value = myJson.words;
         });
+
+    addSeedModal.style.display = "block";
 }
 
 mymap.on('click', onMapClick);
@@ -33,16 +44,77 @@ if (queryString == '?success') {
     alert('Location Saved');
 }
 
-var seedIcon = L.icon({
-    iconUrl: '../assets/img/seedIcon.png',
+var seedPacket1 = L.icon({
+    iconUrl: '../assets/img/seedPacket1.png',
     iconSize: [38, 38]
+});
+
+var seedPacket2 = L.icon({
+    iconUrl: '../assets/img/seedPacket2.png',
+    iconSize: [38, 38]
+});
+
+var seedPacket3 = L.icon({
+    iconUrl: '../assets/img/seedPacket3.png',
+    iconSize: [38, 38]
+});
+
+var seedPacket4 = L.icon({
+    iconUrl: '../assets/img/seedPacket4.png',
+    iconSize: [38, 38]
+});
+
+var genesis = L.icon({
+    iconUrl: '../assets/img/hiveIcons/genesis.png',
+    iconSize: [52, 60]
+});
+
+var pml = L.icon({
+    iconUrl: '../assets/img/hiveIcons/pml.png',
+    iconSize: [52, 60]
+});
+
+var rwy = L.icon({
+    iconUrl: '../assets/img/hiveIcons/rwy.png',
+    iconSize: [52, 60]
+});
+
+var column = L.icon({
+    iconUrl: '../assets/img/hiveIcons/column.png',
+    iconSize: [52, 60]
 });
 
 fetch('/api/getMarkers').then((response) => {
     return response.json();
 }).then((myJson) => {
     myJson.forEach((loc) => {
-        var marker = L.marker([loc.latitude, loc.longitude], { icon: seedIcon }).addTo(mymap);
+        if (loc.seedPacketColor === 'seedPacket1') {
+            var marker = L.marker([loc.latitude, loc.longitude], { icon: seedPacket1 }).addTo(mymap);
+        } else if (loc.seedPacketColor === 'seedPacket2') {
+            var marker = L.marker([loc.latitude, loc.longitude], { icon: seedPacket2 }).addTo(mymap);
+        } else if (loc.seedPacketColor === 'seedPacket3') {
+            var marker = L.marker([loc.latitude, loc.longitude], { icon: seedPacket3 }).addTo(mymap);
+        } else if (loc.seedPacketColor === 'seedPacket4') {
+            var marker = L.marker([loc.latitude, loc.longitude], { icon: seedPacket4 }).addTo(mymap);
+        }
     });
 })
+
+fetch('/api/getHives').then((response) => {
+    return response.json();
+}).then((myJson) => {
+    myJson.forEach((loc) => {
+        console.log(loc);
+        if (loc.icon === 'column') {
+            var marker = L.marker([loc.latitude, loc.longitude], { icon: column }).addTo(mymap);
+        } else if (loc.icon === 'genesis') {
+            var marker = L.marker([loc.latitude, loc.longitude], { icon: genesis }).addTo(mymap);
+        } else if (loc.icon === 'pml') {
+            var marker = L.marker([loc.latitude, loc.longitude], { icon: pml }).addTo(mymap);
+        } else if (loc.icon === 'rwy') {
+            var marker = L.marker([loc.latitude, loc.longitude], { icon: rwy }).addTo(mymap);
+        }
+    });
+})
+
 

@@ -1,7 +1,8 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
-const SeedLocations = require('./models/SeedLocations')
+const SeedLocations = require('./models/SeedLocations');
+const HiveLocations = require('./models/HiveLocations')
 
 var port = 3000;
 
@@ -22,11 +23,12 @@ app.get('/', (req, res) => {
 
 app.post('/api/addMarker', (req, res) => {
     //if (err) throw err;
-    const { longitude, latitude, whatThreeWords, seedPacketNumber } = req.body;
+    const { longitude, latitude, whatThreeWords, seedPacketColor, seedPacketNumber } = req.body;
     seedLocation = new SeedLocations({
         longitude,
         latitude,
         whatThreeWords,
+        seedPacketColor,
         seedPacketNumber
     });
     seedLocation.save();
@@ -36,6 +38,14 @@ app.post('/api/addMarker', (req, res) => {
 
 app.get('/api/getMarkers', (req, res) => {
     SeedLocations.find({}, (err, docs) => {
+        if (err) throw err;
+        console.log(docs)
+        res.send(docs);
+    })
+})
+
+app.get('/api/getHives', (req, res) => {
+    HiveLocations.find({}, (err, docs) => {
         if (err) throw err;
         console.log(docs)
         res.send(docs);

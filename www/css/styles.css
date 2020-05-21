@@ -1,5 +1,101 @@
-h1{
-    color: red;
+*{
+    border: 0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-#mapid { height: 540px; }
+body{
+    height: 100vh;
+    width: 100vw;
+}
+
+.container{
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.shopLink{
+    position: absolute;
+    z-index: 100;
+    width: 100px;
+    height: 100px;
+    bottom: 30px;
+    right: 10px;
+}
+
+.shopLink > img{
+    width: 100%;
+}
+
+#mapid { 
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%; 
+    z-index: 50;
+}
+
+#addSeedsForm{
+    display: flex;
+    flex-direction: column;
+}
+
+#addSeedsForm .form-group{
+    width: 100%;
+
+}
+
+#addSeedsForm input{
+    border: 1px solid #eee;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+#seedPacketColor{
+    border: 1px solid #eee;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.submitBTN{
+    background-color: yellow;
+    padding: 10px 20px;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 200; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border-radius: 20px;
+    border: 4px solid #000;
+    width: 40%; /* Could be more or less, depending on screen size */
+  }
+  
+  
