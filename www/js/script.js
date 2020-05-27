@@ -1,10 +1,14 @@
 
 var addSeedModal = document.getElementById("addSeedModal");
-
 window.onclick = function (event) {
     if (event.target == addSeedModal) {
         addSeedModal.style.display = "none";
     }
+}
+
+const queryString = window.location.search;
+if (queryString == '?success') {
+    alert('Location Saved');
 }
 
 var mymap = L.map('mapid').setView([50.37039039587762, -4.142532348632813], 13);
@@ -39,10 +43,8 @@ function onMapClick(e) {
 
 mymap.on('click', onMapClick);
 
-const queryString = window.location.search;
-if (queryString == '?success') {
-    alert('Location Saved');
-}
+
+//Create Seed Pack Icons and GET from API
 
 var seedPacket1 = L.icon({
     iconUrl: '../assets/img/seedPacket1.png',
@@ -64,6 +66,25 @@ var seedPacket4 = L.icon({
     iconSize: [38, 38]
 });
 
+fetch('/api/getMarkers').then((response) => {
+    return response.json();
+}).then((myJson) => {
+    myJson.forEach((loc) => {
+        if (loc.seedPacketColor === 'seedPacket1') {
+            L.marker([loc.latitude, loc.longitude], { icon: seedPacket1 }).addTo(mymap);
+        } else if (loc.seedPacketColor === 'seedPacket2') {
+            L.marker([loc.latitude, loc.longitude], { icon: seedPacket2 }).addTo(mymap);
+        } else if (loc.seedPacketColor === 'seedPacket3') {
+            L.marker([loc.latitude, loc.longitude], { icon: seedPacket3 }).addTo(mymap);
+        } else if (loc.seedPacketColor === 'seedPacket4') {
+            L.marker([loc.latitude, loc.longitude], { icon: seedPacket4 }).addTo(mymap);
+        }
+    });
+})
+
+
+//Create Hive Icons and GET from API
+
 var genesis = L.icon({
     iconUrl: '../assets/img/hiveIcons/genesis.png',
     iconSize: [52, 60]
@@ -84,35 +105,18 @@ var column = L.icon({
     iconSize: [52, 60]
 });
 
-fetch('/api/getMarkers').then((response) => {
-    return response.json();
-}).then((myJson) => {
-    myJson.forEach((loc) => {
-        if (loc.seedPacketColor === 'seedPacket1') {
-            var marker = L.marker([loc.latitude, loc.longitude], { icon: seedPacket1 }).addTo(mymap);
-        } else if (loc.seedPacketColor === 'seedPacket2') {
-            var marker = L.marker([loc.latitude, loc.longitude], { icon: seedPacket2 }).addTo(mymap);
-        } else if (loc.seedPacketColor === 'seedPacket3') {
-            var marker = L.marker([loc.latitude, loc.longitude], { icon: seedPacket3 }).addTo(mymap);
-        } else if (loc.seedPacketColor === 'seedPacket4') {
-            var marker = L.marker([loc.latitude, loc.longitude], { icon: seedPacket4 }).addTo(mymap);
-        }
-    });
-})
-
 fetch('/api/getHives').then((response) => {
     return response.json();
 }).then((myJson) => {
     myJson.forEach((loc) => {
-        console.log(loc);
         if (loc.icon === 'column') {
-            var marker = L.marker([loc.latitude, loc.longitude], { icon: column }).addTo(mymap);
+            L.marker([loc.latitude, loc.longitude], { icon: column }).addTo(mymap);
         } else if (loc.icon === 'genesis') {
-            var marker = L.marker([loc.latitude, loc.longitude], { icon: genesis }).addTo(mymap);
+            L.marker([loc.latitude, loc.longitude], { icon: genesis }).addTo(mymap);
         } else if (loc.icon === 'pml') {
-            var marker = L.marker([loc.latitude, loc.longitude], { icon: pml }).addTo(mymap);
+            L.marker([loc.latitude, loc.longitude], { icon: pml }).addTo(mymap);
         } else if (loc.icon === 'rwy') {
-            var marker = L.marker([loc.latitude, loc.longitude], { icon: rwy }).addTo(mymap);
+            L.marker([loc.latitude, loc.longitude], { icon: rwy }).addTo(mymap);
         }
     });
 })
