@@ -11,23 +11,46 @@ body{
     width: 100vw;
 }
 
+.w-100{
+    width: 100%;
+}
+
 .container{
     position: relative;
     height: 100%;
     width: 100%;
 }
 
-.shopLink{
+.links{
     position: absolute;
     z-index: 100;
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     bottom: 30px;
     right: 10px;
+    border-radius: 50px;
+    background-color: black;
+    padding: 10px;
+    overflow: hidden;
+    transition: height 0.4s ease-out;
 }
 
-.shopLink > img{
+.links.open{
+    height: 300px;
+}
+
+.links > img{
     width: 100%;
+    cursor: pointer;
+    transform: rotate(0deg);
+    transition: transform 0.4s ease-out;
+    margin-top: -3px;
+    position: relative;
+    bottom: 0;
+}
+
+.links > img.active{
+    transform: rotate(180deg);
 }
 
 #mapid { 

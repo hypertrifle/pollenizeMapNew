@@ -1,3 +1,11 @@
+var linksTrigger = document.querySelector('#linksTrigger');
+var links = document.querySelector('.links');
+linksTrigger.addEventListener('click', () => {
+    linksTrigger.classList.toggle('active');
+    links.classList.toggle('open');
+})
+
+
 
 var addSeedModal = document.getElementById("addSeedModal");
 window.onclick = function (event) {

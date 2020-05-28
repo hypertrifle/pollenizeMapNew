@@ -5,6 +5,7 @@ const SeedLocations = require('./models/SeedLocations');
 const HiveLocations = require('./models/HiveLocations')
 
 var port = process.env.PORT || 3000;
+var mongoURI = process.env.mongoURI || 'mongodb+srv://admin:Password123@testcluster-z6dd7.mongodb.net/pollenize?retryWrites=true&w=majority';
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -13,10 +14,15 @@ app.use(express.static('www'));
 
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb+srv://admin:Password123@testcluster-z6dd7.mongodb.net/pollenize?retryWrites=true&w=majority', {
+mongoose.connect(mongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
-});
+}).then(() => {
+    console.log('Connected to the DB');
+})
+    .catch((err) => {
+        console.log('Not connected to the DB with err: ' + err);
+    });
 
 app.get('/', (req, res) => {
     try {
