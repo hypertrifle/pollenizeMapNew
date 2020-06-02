@@ -17,19 +17,36 @@
         <nav class="links">
             <img id="linksTrigger" src="assets/img/pollenizeLogoFull.png" alt="Pollenize Logo">
             <ul>
-                <li><img class="w-100" src="assets/img/pollenizeLogoFull.png" alt="Pollenize Logo"></li>
-                <li><img class="w-100" src="assets/img/pollenizeLogoFull.png" alt="Pollenize Logo"></li>
-                <li><img class="w-100" src="assets/img/pollenizeLogoFull.png" alt="Pollenize Logo"></li>
+                <li>
+                    <img id="seedShopsLayerControl" class="w-100" src="assets/img/pollenizeSeedShopsIcon.png"
+                        alt="Pollenize Seed Shop Icon">
+                </li>
+                <li>
+                    <img id="hivesLayerControl" class="w-100" src="assets/img/pollenizeHivesIcon.png"
+                        alt="Pollenize Hive Icon">
+                </li>
+                <li>
+                    <img id="rewildingLayerControl" class="w-100"
+                        src="assets/img/pollenizeRewildingSeedsLocationIcon.png" alt="Pollenize Rewilding Seeds">
+                </li>
             </ul>
 
         </nav>
         <div id="mapid"></div>
     </div>
 
+    <!-- Weclome modal START -->
+    <div id="welcomeModal" class="modal">
+        <div class="modal-content">
+            <h1>Welcome</h1>
+        </div>
+    </div>
+    <!-- Welcome modal END -->
+
     <!-- Add seed modal START -->
     <div id="addSeedModal" class="modal">
         <div class="modal-content">
-            <h1>Add Seeds</h1>
+            <h1>Add your 'Rewilding-Seeds' Location</h1>
             <form id="addSeedsForm" action="/api/addMarker" method="POST">
                 <div class="form-group">
                     <label for="longitude">Longitude</label>
@@ -45,12 +62,14 @@
                 </div>
                 <div class="form-group">
                     <label for="seedPacketColor">Seed Packet Color</label>
+
                     <select name="seedPacketColor" id="seedPacketColor">
                         <option value="seedPacket1">Green</option>
                         <option value="seedPacket2">Red</option>
                         <option value="seedPacket3">Purple</option>
                         <option value="seedPacket4">Blue</option>
                     </select>
+
                 </div>
                 <div class="form-group">
                     <label for="seedPacketNumber">Seed Packet Number</label>

@@ -5,14 +5,20 @@ linksTrigger.addEventListener('click', () => {
     links.classList.toggle('open');
 })
 
-
-
 var addSeedModal = document.getElementById("addSeedModal");
+var welcomeModal = document.getElementById("welcomeModal");
+
 window.onclick = function (event) {
+    welcomeModal.style.display = "none";
     if (event.target == addSeedModal) {
         addSeedModal.style.display = "none";
     }
 }
+
+window.onload = (event) => {
+    console.log('window ready')
+    welcomeModal.style.display = "block";
+};
 
 const queryString = window.location.search;
 if (queryString == '?success') {
@@ -51,27 +57,30 @@ function onMapClick(e) {
 
 mymap.on('click', onMapClick);
 
-
 //Create Seed Pack Icons and GET from API
 
 var seedPacket1 = L.icon({
     iconUrl: '../assets/img/seedPacket1.png',
-    iconSize: [38, 38]
+    iconSize: [50, 57],
+    className: 'rewildingSeedsLayer'
 });
 
 var seedPacket2 = L.icon({
     iconUrl: '../assets/img/seedPacket2.png',
-    iconSize: [38, 38]
+    iconSize: [50, 57],
+    className: 'rewildingSeedsLayer'
 });
 
 var seedPacket3 = L.icon({
     iconUrl: '../assets/img/seedPacket3.png',
-    iconSize: [38, 38]
+    iconSize: [50, 57],
+    className: 'rewildingSeedsLayer'
 });
 
 var seedPacket4 = L.icon({
     iconUrl: '../assets/img/seedPacket4.png',
-    iconSize: [38, 38]
+    iconSize: [50, 57],
+    className: 'rewildingSeedsLayer'
 });
 
 fetch('/api/getMarkers').then((response) => {
@@ -95,22 +104,62 @@ fetch('/api/getMarkers').then((response) => {
 
 var genesis = L.icon({
     iconUrl: '../assets/img/hiveIcons/genesis.png',
-    iconSize: [52, 60]
+    iconSize: [52, 60],
+    className: 'hivesLayer'
 });
 
 var pml = L.icon({
     iconUrl: '../assets/img/hiveIcons/pml.png',
-    iconSize: [52, 60]
+    iconSize: [52, 60],
+    className: 'hivesLayer'
 });
 
 var rwy = L.icon({
     iconUrl: '../assets/img/hiveIcons/rwy.png',
-    iconSize: [52, 60]
+    iconSize: [52, 60],
+    className: 'hivesLayer'
 });
 
 var column = L.icon({
     iconUrl: '../assets/img/hiveIcons/column.png',
-    iconSize: [52, 60]
+    iconSize: [52, 60],
+    className: 'hivesLayer'
+});
+
+var kings = L.icon({
+    iconUrl: '../assets/img/hiveIcons/kings.png',
+    iconSize: [52, 60],
+    className: 'hivesLayer'
+});
+
+var theatre = L.icon({
+    iconUrl: '../assets/img/hiveIcons/theatre.png',
+    iconSize: [52, 60],
+    className: 'hivesLayer'
+});
+
+var box = L.icon({
+    iconUrl: '../assets/img/hiveIcons/box.png',
+    iconSize: [52, 60],
+    className: 'hivesLayer'
+});
+
+var mba = L.icon({
+    iconUrl: '../assets/img/hiveIcons/mba.png',
+    iconSize: [52, 60],
+    className: 'hivesLayer'
+});
+
+var nma = L.icon({
+    iconUrl: '../assets/img/hiveIcons/nma.png',
+    iconSize: [52, 60],
+    className: 'hivesLayer'
+});
+
+var newIcon = L.icon({
+    iconUrl: '../assets/img/hiveIcons/new.png',
+    iconSize: [52, 60],
+    className: 'hivesLayer'
 });
 
 fetch('/api/getHives').then((response) => {
@@ -126,7 +175,65 @@ fetch('/api/getHives').then((response) => {
         } else if (loc.icon === 'rwy') {
             L.marker([loc.latitude, loc.longitude], { icon: rwy }).addTo(mymap);
         }
+        else if (loc.icon === 'kings') {
+            L.marker([loc.latitude, loc.longitude], { icon: kings }).addTo(mymap);
+        }
+        else if (loc.icon === 'theatre') {
+            L.marker([loc.latitude, loc.longitude], { icon: theatre }).addTo(mymap);
+        }
+        else if (loc.icon === 'box') {
+            L.marker([loc.latitude, loc.longitude], { icon: box }).addTo(mymap);
+        }
+        else if (loc.icon === 'mba') {
+            L.marker([loc.latitude, loc.longitude], { icon: mba }).addTo(mymap);
+        }
+        else if (loc.icon === 'nma') {
+            L.marker([loc.latitude, loc.longitude], { icon: nma }).addTo(mymap);
+        }
+        else {
+            L.marker([loc.latitude, loc.longitude], { icon: newIcon }).addTo(mymap);
+        }
     });
 })
 
+var seedShop = L.icon({
+    iconUrl: '../assets/img/seedShopIcons/seedShopIcon.png',
+    iconSize: [52, 60],
+    className: 'seedShopsLayer'
+});
+
+fetch('/api/getSeedShops').then((response) => {
+    return response.json();
+}).then((myJson) => {
+    myJson.forEach((loc) => {
+        console.log(loc);
+        L.marker([loc.latitude, loc.longitude], { icon: seedShop }).addTo(mymap);
+    });
+})
+
+
+const rewildingLayerControl = document.querySelector('#rewildingLayerControl');
+const hivesLayerControl = document.querySelector('#hivesLayerControl');
+const seedShopsLayerControll = document.querySelector('#rewildingLayerControl');
+
+rewildingLayerControl.addEventListener('click', () => {
+    var rewildingSeedsLayerMarkers = document.querySelectorAll('.rewildingSeedsLayer');
+    rewildingSeedsLayerMarkers.forEach(rewildingSeedsLayerMarker => {
+        rewildingSeedsLayerMarker.classList.toggle('hideLayer');
+    })
+})
+
+hivesLayerControl.addEventListener('click', () => {
+    var hivesLayerMarkers = document.querySelectorAll('.hivesLayer');
+    hivesLayerMarkers.forEach(hivesLayerMarker => {
+        hivesLayerMarker.classList.toggle('hideLayer');
+    })
+})
+
+seedShopsLayerControll.addEventListener('click', () => {
+    var seedShopsLayerMarkers = document.querySelectorAll('.seedShopsLayer');
+    seedShopsLayerMarkers.forEach(seedShopsLayerMarker => {
+        seedShopsLayerMarker.classList.toggle('hideLayer');
+    })
+})
 
