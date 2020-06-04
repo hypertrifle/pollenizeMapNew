@@ -9,4 +9,4 @@ var SeedShopLocationSchema = new Schema({
     stock: String
 });
 
-module.exports = SeedShopLocations = mongoose.model('seedShopLocations', SeedShopLocationSchema);
+module.exports = SeedShopLocations = mongoose.model('SeedShopLocations', SeedShopLocationSchema);

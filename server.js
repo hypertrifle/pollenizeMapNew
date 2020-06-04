@@ -81,7 +81,6 @@ app.get('/api/getSeedShops', (req, res) => {
     try {
         SeedShopLocations.find({}, (err, docs) => {
             if (err) throw err;
-            console.log(docs)
             res.status(200).send(docs);
         })
     } catch (err) {

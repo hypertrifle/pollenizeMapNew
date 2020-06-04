@@ -16,13 +16,18 @@ window.onclick = function (event) {
 }
 
 window.onload = (event) => {
-    console.log('window ready')
-    welcomeModal.style.display = "block";
+    //sessionStorage.setItem('firstVisit', 'notvisited');
+    if (sessionStorage.getItem('firstVisit', 'notvisited')) {
+        welcomeModal.style.display = "none";
+        sessionStorage.setItem('firstVisit', 'visited');
+    }
+
 };
 
 const queryString = window.location.search;
 if (queryString == '?success') {
     alert('Location Saved');
+    window.location.search = '';
 }
 
 var mymap = L.map('mapid').setView([50.37039039587762, -4.142532348632813], 13);
@@ -59,43 +64,17 @@ mymap.on('click', onMapClick);
 
 //Create Seed Pack Icons and GET from API
 
-var seedPacket1 = L.icon({
-    iconUrl: '../assets/img/seedPacket1.png',
-    iconSize: [50, 57],
-    className: 'rewildingSeedsLayer'
-});
-
-var seedPacket2 = L.icon({
-    iconUrl: '../assets/img/seedPacket2.png',
-    iconSize: [50, 57],
-    className: 'rewildingSeedsLayer'
-});
-
-var seedPacket3 = L.icon({
-    iconUrl: '../assets/img/seedPacket3.png',
-    iconSize: [50, 57],
-    className: 'rewildingSeedsLayer'
-});
-
-var seedPacket4 = L.icon({
-    iconUrl: '../assets/img/seedPacket4.png',
-    iconSize: [50, 57],
-    className: 'rewildingSeedsLayer'
-});
-
 fetch('/api/getMarkers').then((response) => {
     return response.json();
 }).then((myJson) => {
     myJson.forEach((loc) => {
-        if (loc.seedPacketColor === 'seedPacket1') {
-            L.marker([loc.latitude, loc.longitude], { icon: seedPacket1 }).addTo(mymap);
-        } else if (loc.seedPacketColor === 'seedPacket2') {
-            L.marker([loc.latitude, loc.longitude], { icon: seedPacket2 }).addTo(mymap);
-        } else if (loc.seedPacketColor === 'seedPacket3') {
-            L.marker([loc.latitude, loc.longitude], { icon: seedPacket3 }).addTo(mymap);
-        } else if (loc.seedPacketColor === 'seedPacket4') {
-            L.marker([loc.latitude, loc.longitude], { icon: seedPacket4 }).addTo(mymap);
-        }
+        var seedPacket = L.icon({
+            iconUrl: `../assets/img/${loc.seedPacketColor}.png`,
+            iconSize: [50, 57],
+            className: 'rewildingSeedsLayer'
+        });
+
+        L.marker([loc.latitude, loc.longitude], { icon: seedPacket }).addTo(mymap);
     });
 })
 
@@ -230,7 +209,7 @@ hivesLayerControl.addEventListener('click', () => {
     })
 })
 
-seedShopsLayerControll.addEventListener('click', () => {
+seedShopsLayerControl.addEventListener('click', () => {
     var seedShopsLayerMarkers = document.querySelectorAll('.seedShopsLayer');
     seedShopsLayerMarkers.forEach(seedShopsLayerMarker => {
         seedShopsLayerMarker.classList.toggle('hideLayer');
