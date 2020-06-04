@@ -1,5 +1,4 @@
 *{
-    border: 0;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -128,5 +127,15 @@ body{
     padding: 20px;
     border-radius: 10px;
     width: 40%; /* Could be more or less, depending on screen size */
+  }
+
+  #welcomeModal > .modal-content{
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+  }
+
+  #welcomeModal > .modal-content > div {
+      padding: 20px;
   }
 

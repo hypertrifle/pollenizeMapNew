@@ -16,9 +16,9 @@ window.onclick = function (event) {
 }
 
 window.onload = (event) => {
-    //sessionStorage.setItem('firstVisit', 'notvisited');
+    sessionStorage.setItem('firstVisit', 'notvisited');
     if (sessionStorage.getItem('firstVisit', 'notvisited')) {
-        welcomeModal.style.display = "none";
+        welcomeModal.style.display = "block";
         sessionStorage.setItem('firstVisit', 'visited');
     }
 
