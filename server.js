@@ -3,7 +3,7 @@ var app = express();
 var bodyParser = require('body-parser');
 const SeedLocations = require('./models/SeedLocations')
 
-var port = 3000;
+var port = 8080;
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
