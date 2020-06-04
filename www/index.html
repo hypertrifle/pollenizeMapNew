@@ -9,20 +9,78 @@
         integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
         crossorigin="" />
     <link rel="stylesheet" href="css/styles.css">
-    <title>Document</title>
+    <title>Pollenize New</title>
 </head>
 
 <body>
-    <h1>HEllo</h1>
-    <form action="/api/addMarker" method="POST">
-        <input name="longitude" id="lngField" type="text" placeholder="Add Longitude">
-        <input name="latitude" id="latField" type="text" placeholder="Add Latitude">
-        <input name="whatThreeWords" id="w3wField" type="text" placeholder="Add What3Words">
-        <input name="seedPacketNumber" id="seedPacketField" type="text" placeholder="Add Seed Packet Number">
-        <button type="submit">Submit</button>
-    </form>
-    <div id="mapid"></div>
-    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <div class="container">
+        <nav class="links">
+            <img id="linksTrigger" src="assets/img/pollenizeLogoFull.png" alt="Pollenize Logo">
+            <ul>
+                <li>
+                    <img id="seedShopsLayerControl" class="w-100" src="assets/img/pollenizeSeedShopsIcon.png"
+                        alt="Pollenize Seed Shop Icon">
+                </li>
+                <li>
+                    <img id="hivesLayerControl" class="w-100" src="assets/img/pollenizeHivesIcon.png"
+                        alt="Pollenize Hive Icon">
+                </li>
+                <li>
+                    <img id="rewildingLayerControl" class="w-100"
+                        src="assets/img/pollenizeRewildingSeedsLocationIcon.png" alt="Pollenize Rewilding Seeds">
+                </li>
+            </ul>
+
+        </nav>
+        <div id="mapid"></div>
+    </div>
+
+    <!-- Weclome modal START -->
+    <div id="welcomeModal" class="modal">
+        <div class="modal-content">
+            <h1>Welcome</h1>
+        </div>
+    </div>
+    <!-- Welcome modal END -->
+
+    <!-- Add seed modal START -->
+    <div id="addSeedModal" class="modal">
+        <div class="modal-content">
+            <h1>Add your 'Rewilding-Seeds' Location</h1>
+            <form id="addSeedsForm" action="/api/addMarker" method="POST">
+                <div class="form-group">
+                    <label for="longitude">Longitude</label>
+                    <input name="longitude" id="lngField" type="text">
+                </div>
+                <div class="form-group">
+                    <label for="latitude">Latitude</label>
+                    <input name="latitude" id="latField" type="text">
+                </div>
+                <div class="form-group">
+                    <label for="whatThreeWords">What 3 Words</label>
+                    <input name="whatThreeWords" id="w3wField" type="text">
+                </div>
+                <div class="form-group">
+                    <label for="seedPacketColor">Seed Packet Color</label>
+
+                    <select name="seedPacketColor" id="seedPacketColor">
+                        <option value="seedPacket1">Green</option>
+                        <option value="seedPacket2">Red</option>
+                        <option value="seedPacket3">Purple</option>
+                        <option value="seedPacket4">Blue</option>
+                    </select>
+
+                </div>
+                <div class="form-group">
+                    <label for="seedPacketNumber">Seed Packet Number</label>
+                    <input name="seedPacketNumber" id="seedPacketField" type="text">
+                </div>
+                <button class="submitBTN" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+    <!-- Add seed modal END -->
+
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
         integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
         crossorigin=""></script>

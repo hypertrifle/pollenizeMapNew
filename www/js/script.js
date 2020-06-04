@@ -1,11 +1,43 @@
+var linksTrigger = document.querySelector('#linksTrigger');
+var links = document.querySelector('.links');
+linksTrigger.addEventListener('click', () => {
+    linksTrigger.classList.toggle('active');
+    links.classList.toggle('open');
+})
+
+var addSeedModal = document.getElementById("addSeedModal");
+var welcomeModal = document.getElementById("welcomeModal");
+
+window.onclick = function (event) {
+    welcomeModal.style.display = "none";
+    if (event.target == addSeedModal) {
+        addSeedModal.style.display = "none";
+    }
+}
+
+window.onload = (event) => {
+    //sessionStorage.setItem('firstVisit', 'notvisited');
+    if (sessionStorage.getItem('firstVisit', 'notvisited')) {
+        welcomeModal.style.display = "none";
+        sessionStorage.setItem('firstVisit', 'visited');
+    }
+
+};
+
+const queryString = window.location.search;
+if (queryString == '?success') {
+    alert('Location Saved');
+    window.location.search = '';
+}
+
 var mymap = L.map('mapid').setView([50.37039039587762, -4.142532348632813], 13);
 
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     maxZoom: 18,
-    id: 'chrisboothplymuni/ck6vyoaey085d1iplyo2njs25',
+    id: 'fooldome/ck0xrpybh0rzq1crp6narwuyl',
     tileSize: 512,
     zoomOffset: -1,
-    accessToken: 'pk.eyJ1IjoiY2hyaXNib290aHBseW11bmkiLCJhIjoiY2s2Z3pvcTJjMGM1ZDNkcDg5OG0xMXV1byJ9.1C8-bGFiANy_BxzCNfYA5A'
+    accessToken: 'pk.eyJ1IjoiZm9vbGRvbWUiLCJhIjoiY2pxcHJyb2c1MDBzajQzbzZoM2dlaHRkeiJ9.CDXrbrpZqfi6A5bg5mX9TA'
 }).addTo(mymap);
 
 
@@ -24,25 +56,163 @@ function onMapClick(e) {
         .then((myJson) => {
             w3wField.value = myJson.words;
         });
+
+    addSeedModal.style.display = "block";
 }
 
 mymap.on('click', onMapClick);
 
-const queryString = window.location.search;
-if (queryString == '?success') {
-    alert('Location Saved');
-}
-
-var seedIcon = L.icon({
-    iconUrl: '../assets/img/seedIcon.png',
-    iconSize: [38, 38]
-});
+//Create Seed Pack Icons and GET from API
 
 fetch('/api/getMarkers').then((response) => {
     return response.json();
 }).then((myJson) => {
     myJson.forEach((loc) => {
-        var marker = L.marker([loc.latitude, loc.longitude], { icon: seedIcon }).addTo(mymap);
+        var seedPacket = L.icon({
+            iconUrl: `../assets/img/${loc.seedPacketColor}.png`,
+            iconSize: [50, 57],
+            className: 'rewildingSeedsLayer'
+        });
+
+        L.marker([loc.latitude, loc.longitude], { icon: seedPacket }).addTo(mymap);
     });
+})
+
+
+//Create Hive Icons and GET from API
+
+var genesis = L.icon({
+    iconUrl: '../assets/img/hiveIcons/genesis.png',
+    iconSize: [52, 60],
+    className: 'hivesLayer'
+});
+
+var pml = L.icon({
+    iconUrl: '../assets/img/hiveIcons/pml.png',
+    iconSize: [52, 60],
+    className: 'hivesLayer'
+});
+
+var rwy = L.icon({
+    iconUrl: '../assets/img/hiveIcons/rwy.png',
+    iconSize: [52, 60],
+    className: 'hivesLayer'
+});
+
+var column = L.icon({
+    iconUrl: '../assets/img/hiveIcons/column.png',
+    iconSize: [52, 60],
+    className: 'hivesLayer'
+});
+
+var kings = L.icon({
+    iconUrl: '../assets/img/hiveIcons/kings.png',
+    iconSize: [52, 60],
+    className: 'hivesLayer'
+});
+
+var theatre = L.icon({
+    iconUrl: '../assets/img/hiveIcons/theatre.png',
+    iconSize: [52, 60],
+    className: 'hivesLayer'
+});
+
+var box = L.icon({
+    iconUrl: '../assets/img/hiveIcons/box.png',
+    iconSize: [52, 60],
+    className: 'hivesLayer'
+});
+
+var mba = L.icon({
+    iconUrl: '../assets/img/hiveIcons/mba.png',
+    iconSize: [52, 60],
+    className: 'hivesLayer'
+});
+
+var nma = L.icon({
+    iconUrl: '../assets/img/hiveIcons/nma.png',
+    iconSize: [52, 60],
+    className: 'hivesLayer'
+});
+
+var newIcon = L.icon({
+    iconUrl: '../assets/img/hiveIcons/new.png',
+    iconSize: [52, 60],
+    className: 'hivesLayer'
+});
+
+fetch('/api/getHives').then((response) => {
+    return response.json();
+}).then((myJson) => {
+    myJson.forEach((loc) => {
+        if (loc.icon === 'column') {
+            L.marker([loc.latitude, loc.longitude], { icon: column }).addTo(mymap);
+        } else if (loc.icon === 'genesis') {
+            L.marker([loc.latitude, loc.longitude], { icon: genesis }).addTo(mymap);
+        } else if (loc.icon === 'pml') {
+            L.marker([loc.latitude, loc.longitude], { icon: pml }).addTo(mymap);
+        } else if (loc.icon === 'rwy') {
+            L.marker([loc.latitude, loc.longitude], { icon: rwy }).addTo(mymap);
+        }
+        else if (loc.icon === 'kings') {
+            L.marker([loc.latitude, loc.longitude], { icon: kings }).addTo(mymap);
+        }
+        else if (loc.icon === 'theatre') {
+            L.marker([loc.latitude, loc.longitude], { icon: theatre }).addTo(mymap);
+        }
+        else if (loc.icon === 'box') {
+            L.marker([loc.latitude, loc.longitude], { icon: box }).addTo(mymap);
+        }
+        else if (loc.icon === 'mba') {
+            L.marker([loc.latitude, loc.longitude], { icon: mba }).addTo(mymap);
+        }
+        else if (loc.icon === 'nma') {
+            L.marker([loc.latitude, loc.longitude], { icon: nma }).addTo(mymap);
+        }
+        else {
+            L.marker([loc.latitude, loc.longitude], { icon: newIcon }).addTo(mymap);
+        }
+    });
+})
+
+var seedShop = L.icon({
+    iconUrl: '../assets/img/seedShopIcons/seedShopIcon.png',
+    iconSize: [52, 60],
+    className: 'seedShopsLayer'
+});
+
+fetch('/api/getSeedShops').then((response) => {
+    return response.json();
+}).then((myJson) => {
+    myJson.forEach((loc) => {
+        console.log(loc);
+        L.marker([loc.latitude, loc.longitude], { icon: seedShop }).addTo(mymap);
+    });
+})
+
+
+const rewildingLayerControl = document.querySelector('#rewildingLayerControl');
+const hivesLayerControl = document.querySelector('#hivesLayerControl');
+const seedShopsLayerControll = document.querySelector('#rewildingLayerControl');
+
+rewildingLayerControl.addEventListener('click', () => {
+    var rewildingSeedsLayerMarkers = document.querySelectorAll('.rewildingSeedsLayer');
+    rewildingSeedsLayerMarkers.forEach(rewildingSeedsLayerMarker => {
+        rewildingSeedsLayerMarker.classList.toggle('hideLayer');
+    })
+})
+
+hivesLayerControl.addEventListener('click', () => {
+    var hivesLayerMarkers = document.querySelectorAll('.hivesLayer');
+    hivesLayerMarkers.forEach(hivesLayerMarker => {
+        hivesLayerMarker.classList.toggle('hideLayer');
+    })
+})
+
+seedShopsLayerControl.addEventListener('click', () => {
+    var seedShopsLayerMarkers = document.querySelectorAll('.seedShopsLayer');
+    seedShopsLayerMarkers.forEach(seedShopsLayerMarker => {
+        seedShopsLayerMarker.classList.toggle('hideLayer');
+    })
 })
 

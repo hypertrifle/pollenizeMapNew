@@ -1,5 +1,132 @@
-h1{
-    color: red;
+*{
+    border: 0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-#mapid { height: 540px; }
+body{
+    height: 100vh;
+    width: 100vw;
+}
+
+.w-100{
+    width: 100%;
+}
+
+.hideLayer{
+    display: none !important;
+}
+
+.container{
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.links{
+    position: absolute;
+    z-index: 100;
+    width: 80px;
+    height: 80px;
+    bottom: 30px;
+    right: 10px;
+    border-radius: 50px;
+    background-color: black;
+    padding: 10px;
+    overflow: hidden;
+    transition: height 0.4s ease-out;
+}
+
+.links.open{
+    height: 300px;
+}
+
+.links > img{
+    width: 100%;
+    cursor: pointer;
+    transform: rotate(0deg);
+    transition: transform 0.4s ease-out;
+    margin-top: -3px;
+    position: relative;
+    bottom: 0;
+}
+
+.links > img.active{
+    transform: rotate(180deg);
+}
+
+#mapid { 
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%; 
+    z-index: 50;
+}
+
+#addSeedsForm{
+    display: flex;
+    flex-direction: column;
+}
+
+#addSeedsForm .form-group{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    background-color: rgb(252, 252, 240);
+    padding: 10px;
+    border-radius: 10px;;
+    color: #333;
+}
+
+#addSeedsForm input{
+    padding: 5px;
+    margin: 5px 0px;
+    font-size: 16px;
+    border: transparent;
+    border-bottom: 1px solid #222 ;
+    background-color: transparent;
+}
+
+#seedPacketColor{
+    border: 1px solid #eee;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.submitBTN{
+    background-color: #fabd31;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 200; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border-radius: 10px;
+    width: 40%; /* Could be more or less, depending on screen size */
+  }
+
