@@ -6,7 +6,7 @@ var HiveLocationSchema = new Schema({
     link: String,
     longitude: String,
     latitude: String,
-    icon: String
+    icon: { type: String, default: 'newIcon' }
 });
 
 module.exports = HiveLocations = mongoose.model('HiveLocations', HiveLocationSchema);
