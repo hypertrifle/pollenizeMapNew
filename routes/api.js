@@ -48,7 +48,7 @@ router.get('/getMarkers', (req, res) => {
 })
 
 //See Location CSV
-router.get('/getSeedCSV', (req, res) => {
+router.get('/getSeedCSV', isAuth, (req, res) => {
     let csv;
     try {
         SeedLocations.find({}, (err, docs) => {
