@@ -1,3 +1,4 @@
+//Data model for planted seed locations
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 

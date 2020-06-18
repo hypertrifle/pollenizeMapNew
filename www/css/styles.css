@@ -1,3 +1,4 @@
+/* Global Style Sheet */
 *{
     margin: 0;
     padding: 0;
@@ -54,6 +55,16 @@ body{
 
 .links > img.active{
     transform: rotate(180deg);
+}
+
+.layerControl{
+ opacity: 1;
+ cursor: pointer;
+ transition: opacity 0.1s ease;
+}
+
+.layerHidden{
+    opacity: 0.5;
 }
 
 #mapid { 
@@ -148,6 +159,10 @@ body{
       padding: 20px;
   }
 
+  .welcomeModalText > *{
+      padding: 20px;
+  }
+
 .admin{
     background-image: url('../assets/img/pollenizeLogoTransparent.png');
     background-attachment: fixed;
@@ -166,4 +181,11 @@ body{
     flex-direction: column;
     align-self: center;
     justify-self: center;
+}
+
+.adminHeader{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-evenly;
 }

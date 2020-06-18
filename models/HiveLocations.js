@@ -1,3 +1,4 @@
+//Data model for Hive Locations
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
@@ -6,7 +7,8 @@ var HiveLocationSchema = new Schema({
     link: String,
     longitude: String,
     latitude: String,
-    icon: { type: String, default: 'newIcon' }
+    icon: { type: String, default: 'newIcon' },
+    date: { type: Date, default: Date.now }
 });
 
 module.exports = HiveLocations = mongoose.model('HiveLocations', HiveLocationSchema);

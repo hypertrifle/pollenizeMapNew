@@ -5,6 +5,13 @@ linksTrigger.addEventListener('click', () => {
     links.classList.toggle('open');
 })
 
+var layerControls = document.querySelectorAll('.layerControl');
+layerControls.forEach(layerControl => {
+    layerControl.addEventListener('click', () => {
+        layerControl.classList.toggle('layerHidden');
+    })
+})
+
 var addSeedModal = document.getElementById("addSeedModal");
 var welcomeModal = document.getElementById("welcomeModal");
 

@@ -1,3 +1,5 @@
+//Routes for actions on /admin
+
 const express = require('express');
 const router = express.Router();
 var passport = require('passport');
@@ -7,8 +9,10 @@ require('../middleware/passport')(passport);
 
 const User = require('../models/User');
 
-//router.use(express.static('www'));
+router.use(express.static('www'));
 
+
+//Reutrns Login for Admin
 router.get('/', (req, res) => {
     try {
         res.status(200).render('admin', { layout: 'admin' });
@@ -18,6 +22,7 @@ router.get('/', (req, res) => {
     }
 })
 
+//Accepts data for new user
 router.post('/createUser', async (req, res) => {
     const { username, password } = req.body;
     try {
@@ -38,6 +43,7 @@ router.post('/createUser', async (req, res) => {
     }
 })
 
+//Accepts login credentials and processes for auth
 router.post('/signin', (req, res, next) => {
     try {
         passport.authenticate('local', {
@@ -50,12 +56,14 @@ router.post('/signin', (req, res, next) => {
     }
 })
 
+//Deserializes current session
 router.get('/signout', (req, res) => {
     //Logs the logged in user out and redirects to the sign in page
     req.logout();
     res.redirect('/');
 })
 
+//Returns Admin dashboard - private route, requires Auth
 router.get('/dashboard', isAuth, (req, res) => {
     try {
         res.status(200).render('adminDashboard', { layout: 'admin' });

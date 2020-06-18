@@ -1,3 +1,4 @@
+//Checks User authentication on the current session
 module.exports = {
     isAuth: (req, res, next) => {
         try {

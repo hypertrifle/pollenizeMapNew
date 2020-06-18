@@ -1,3 +1,4 @@
+//Passport strategy for local authentication - http://www.passportjs.org/packages/passport-local/
 const LocalStrategy = require('passport-local').Strategy;
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
