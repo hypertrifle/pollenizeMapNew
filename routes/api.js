@@ -2,6 +2,13 @@
 const express = require('express');
 const router = express.Router();
 
+const json2csv = require('json2csv').parse;
+
+const fs = require('fs');
+const path = require('path');
+
+const moment = require('moment');
+
 var { isAuth } = require('../middleware/isAuth');
 
 const SeedLocations = require('../models/SeedLocations');
@@ -33,6 +40,37 @@ router.get('/getMarkers', (req, res) => {
         SeedLocations.find({}, (err, docs) => {
             if (err) throw err;
             res.status(200).send(docs);
+        })
+    } catch (err) {
+        console.log(err.message);
+        res.status(500).send('Server Error')
+    }
+})
+
+//See Location CSV
+router.get('/getSeedCSV', (req, res) => {
+    let csv;
+    try {
+        SeedLocations.find({}, (err, docs) => {
+            if (err) throw err;
+            const fields = ['longitude', 'latitude', 'whatThreeWords', 'seedPacketColor', 'seedPacketNumber'];
+            csv = json2csv(docs, { fields });
+
+            const dateTime = moment().format('YYYYMMDDhhmmss');
+            const filePath = path.join(__dirname, "..", "www", "exports", "seedlocations-" + dateTime + ".csv")
+            fs.writeFile(filePath, csv, function (err) {
+                if (err) {
+                    return res.json(err).status(500);
+                }
+                else {
+                    setTimeout(function () {
+                        fs.unlinkSync(filePath); // delete this file after 30 seconds
+                    }, 30000)
+                    return res.redirect("/exports/seedlocations-" + dateTime + ".csv");
+                }
+            });
+
+            //res.status(200).download(csv);
         })
     } catch (err) {
         console.log(err.message);

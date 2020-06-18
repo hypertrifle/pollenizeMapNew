@@ -15,7 +15,14 @@ router.use(express.static('www'));
 //Reutrns Login for Admin
 router.get('/', (req, res) => {
     try {
-        res.status(200).render('admin', { layout: 'admin' });
+        if (req.user == null) {
+            console.log(req.user);
+            res.status(200).render('admin', { layout: 'admin' });
+        } else {
+            console.log(req.user);
+            res.redirect('/admin/dashboard');
+        }
+
     } catch (err) {
         console.log(err.message);
         res.status(500).send('Server Error')
