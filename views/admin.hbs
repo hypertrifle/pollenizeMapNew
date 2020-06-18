@@ -1,10 +1,12 @@
 {{!-- Template for admin login --}}
-<form id="signInForm" action="/admin/signin" method="POST">
-    <div class="form-control">
-        <input type="text" name="username" placeholder="Enter Username">
-    </div>
-    <div class="form-control">
-        <input type="password" name="password" placeholder="Enter Password">
-    </div>
-    <button class="submitBTN" type="submit">Login</button>
-</form>
+<div class="adminContainer">
+    <form id="signInForm" action="/admin/signin" method="POST">
+        <div class="form-control">
+            <input type="text" name="username" placeholder="Enter Username">
+        </div>
+        <div class="form-control">
+            <input type="password" name="password" placeholder="Enter Password">
+        </div>
+        <button class="submitBTN" type="submit">Login</button>
+    </form>
+</div>

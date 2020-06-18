@@ -163,7 +163,7 @@ body{
       padding: 20px;
   }
 
-.admin{
+  .admin{
     background-image: url('../assets/img/pollenizeLogoTransparent.png');
     background-attachment: fixed;
     background-repeat: no-repeat;
@@ -172,11 +172,14 @@ body{
     width: 100vw;
     background-size: 400px;
     backface-visibility: 0.1;
+  }
+
+.adminContainer{
     display: flex;
     justify-content: center;
 }
 
-.admin form{
+.adminContainer form{
     display: flex;
     flex-direction: column;
     align-self: center;
@@ -188,4 +191,14 @@ body{
     flex-direction: row;
     width: 100%;
     justify-content: space-evenly;
+    align-content: center;
+}
+
+.adminHeader > h1{
+    padding-top: 15px;
+}
+
+.CSVBtn{
+    width: 100%;
+    display: flex;
 }
