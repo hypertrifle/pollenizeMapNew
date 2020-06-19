@@ -9,7 +9,7 @@ var mongoose = require('mongoose');
 
 //Port Number and Connection String to DB
 var port = process.env.PORT || 3000;
-var mongoURI = process.env.mongoURI || 'mongodb+srv://admin:Password123@testcluster-z6dd7.mongodb.net/pollenize?retryWrites=true&w=majority';
+var mongoURI = process.env.mongoURI;
 
 //App settings for public files and json formatting
 app.use(bodyParser.json())
