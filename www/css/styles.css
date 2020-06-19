@@ -11,6 +11,18 @@ body{
     width: 100vw;
 }
 
+body.admin{
+    background-image: url('../assets/img/pollenizeLogoTransparent.png');
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 100vh;
+    height: auto;
+    width: 100vw;
+    background-size: 400px;
+    backface-visibility: 0.1;
+  }
+
 .w-100{
     width: 100%;
 }
@@ -76,13 +88,15 @@ body{
     z-index: 50;
 }
 
-#addSeedsForm, #sigInForm{
+#addSeedsForm, #sigInForm, #addHiveForm, #addSeedShopForm{
     display: flex;
     flex-direction: column;
 }
 
 #addSeedsForm .form-group, 
-#sigInForm .form-group{
+#sigInForm .form-group,
+#addHiveForm .form-group,
+#addSeedShopForm .form-group{
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -94,7 +108,9 @@ body{
 }
 
 #addSeedsForm input,
-#signInForm input{
+#signInForm input,
+#addHiveForm input,
+#addSeedShopForm input{
     padding: 5px;
     margin: 5px 0px;
     font-size: 16px;
@@ -118,6 +134,8 @@ body{
     border-radius: 10px;
     margin-top: 10px;
     cursor: pointer;
+    text-align: center;
+    color: #333;
 }
 
 .submitBTN:hover{
@@ -126,27 +144,26 @@ body{
 }
 
 
-/* The Modal (background) */
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 200; /* Sit on top */
+    display: none;
+    position: fixed; 
+    z-index: 200; 
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4);
   }
   
   /* Modal Content/Box */
   .modal-content {
     background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
+    margin: 15% auto; 
     padding: 20px;
     border-radius: 10px;
-    width: 40%; /* Could be more or less, depending on screen size */
+    width: 40%;
   }
 
   #welcomeModal > .modal-content{
@@ -163,22 +180,14 @@ body{
       padding: 20px;
   }
 
-  .admin{
-    background-image: url('../assets/img/pollenizeLogoTransparent.png');
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 100vh;
-    width: 100vw;
-    background-size: 400px;
-    backface-visibility: 0.1;
-  }
-
 .adminContainer{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    min-height: 100vh;
+    width: 50%;
+    margin: 0 auto;
+    flex-direction: column;
 }
 
 .adminContainer form{
@@ -192,8 +201,9 @@ body{
     display: flex;
     flex-direction: row;
     width: 100%;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-content: center;
+    margin-bottom: 20px;
 }
 
 .adminHeader > h1{
@@ -203,4 +213,47 @@ body{
 .CSVBtn{
     width: 100%;
     display: flex;
+}
+
+.adminFormContainer{
+    display: flex;
+    flex-direction: row;
+   justify-content: space-around;
+}
+
+@media only screen and (max-width: 1024px){
+    .modal-content{
+        margin: 10% auto;
+    }
+
+    #welcomeModal > .modal-content{
+        flex-direction: column;
+    }
+
+    .welcomeModalText > *{
+        padding: 5px;
+    }
+
+    .adminFormContainer{
+        flex-direction: column;
+    }
+
+    #addSeedModal > .modal-content{
+        width: 60%;
+        margin: 10px auto;
+    }
+}
+
+@media only screen and (max-width: 600px){
+    .modal-content{
+        width: 90%;
+    }
+
+    #addSeedModal > .modal-content{
+        width: 90%;
+    }
+
+    .adminContainer{
+        width: 95%;
+    }
 }

@@ -1,71 +1,70 @@
 {{!-- Template for admin dashboard --}}
-<div class="adminHeader">
-    <h1> Admin Dashboard</h1>
-    <a class="submitBTN" href="/admin/signout">Sign Out</a>
-</div>
-
-
-<div class="CSVBtn">
-    <a class="submitBTN w-100" href="/api/getSeedCSV">CSV</a>
-</div>
 
 <div class="adminContainer">
+    <div class="adminHeader">
+        <h1> Admin Dashboard</h1>
+        <a class="submitBTN" href="/admin/signout">Sign Out</a>
+    </div>
 
 
-
-    <div>
-        <h1>Add Hive Location</h1>
-        <form id="addHiveForm" action="/api/addHive" method="POST">
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input name="name" type="text">
-            </div>
-            <div class="form-group">
-                <label for="link">Link</label>
-                <input name="link" type="text">
-            </div>
-            <div class="form-group">
-                <label for="longitude">Longitude</label>
-                <input name="longitude" type="text">
-            </div>
-            <div class="form-group">
-                <label for="latitude">Latitude</label>
-                <input name="latitude" type="text">
-            </div>
-            {{!-- <div class="form-group">
+    <div class="CSVBtn">
+        <a class="submitBTN w-100" href="/api/getSeedCSV">Export Seed Packet Locations to CSV</a>
+    </div>
+    <hr>
+    <div class="adminFormContainer">
+        <div>
+            <h1>Add Hive Location</h1>
+            <form id="addHiveForm" action="/api/addHive" method="POST">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input name="name" type="text">
+                </div>
+                <div class="form-group">
+                    <label for="link">Link</label>
+                    <input name="link" type="text">
+                </div>
+                <div class="form-group">
+                    <label for="longitude">Longitude</label>
+                    <input name="longitude" type="text">
+                </div>
+                <div class="form-group">
+                    <label for="latitude">Latitude</label>
+                    <input name="latitude" type="text">
+                </div>
+                {{!-- <div class="form-group">
         <label for="icon">Icon Name</label>
         <input name="icon" type="text">
     </div> --}}
-            <button class="submitBTN" type="submit">Submit</button>
-        </form>
+                <button class="submitBTN" type="submit">Submit</button>
+            </form>
+        </div>
+
+        <div>
+            <h1>Add Seed Shop Location</h1>
+            <form id="addSeedShopForm" action="/api/addSeedShop" method="POST">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input name="name" type="text">
+                </div>
+                <div class="form-group">
+                    <label for="longitude">Longitude</label>
+                    <input name="longitude" type="text">
+                </div>
+                <div class="form-group">
+                    <label for="latitude">Latitude</label>
+                    <input name="latitude" type="text">
+                </div>
+
+                <div class="form-group">
+                    <label for="link">Link</label>
+                    <input name="link" type="text">
+                </div>
+                <div class="form-group">
+                    <label for="stock">Stock</label>
+                    <input name="stock" type="text">
+                </div>
+                <button class="submitBTN" type="submit">Submit</button>
+            </form>
+        </div>
     </div>
-
-    <div>
-        <h1>Add Seed Shop Location</h1>
-        <form id="addSeedShopForm" action="/api/addSeedShop" method="POST">
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input name="name" type="text">
-            </div>
-            <div class="form-group">
-                <label for="longitude">Longitude</label>
-                <input name="longitude" type="text">
-            </div>
-            <div class="form-group">
-                <label for="latitude">Latitude</label>
-                <input name="latitude" type="text">
-            </div>
-
-            <div class="form-group">
-                <label for="link">Link</label>
-                <input name="link" type="text">
-            </div>
-            <div class="form-group">
-                <label for="stock">Stock</label>
-                <input name="stock" type="text">
-            </div>
-            <button class="submitBTN" type="submit">Submit</button>
-        </form>
-    </div>
-
 </div>

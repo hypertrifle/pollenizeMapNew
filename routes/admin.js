@@ -16,10 +16,8 @@ router.use(express.static('www'));
 router.get('/', (req, res) => {
     try {
         if (req.user == null) {
-            console.log(req.user);
             res.status(200).render('admin', { layout: 'admin' });
         } else {
-            console.log(req.user);
             res.redirect('/admin/dashboard');
         }
 
