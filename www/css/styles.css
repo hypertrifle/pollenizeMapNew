@@ -177,6 +177,8 @@ body{
 .adminContainer{
     display: flex;
     justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
 .adminContainer form{
