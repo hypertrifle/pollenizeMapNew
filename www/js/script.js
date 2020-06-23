@@ -1,20 +1,7 @@
-var linksTrigger = document.querySelector('#linksTrigger');
-var links = document.querySelector('.links');
-linksTrigger.addEventListener('click', () => {
-    linksTrigger.classList.toggle('active');
-    links.classList.toggle('open');
-})
 
-var layerControls = document.querySelectorAll('.layerControl');
-layerControls.forEach(layerControl => {
-    layerControl.addEventListener('click', () => {
-        layerControl.classList.toggle('layerHidden');
-    })
-})
-
+//Modal Control
 var addSeedModal = document.getElementById("addSeedModal");
 var welcomeModal = document.getElementById("welcomeModal");
-
 window.onclick = function (event) {
     welcomeModal.style.display = "none";
     if (event.target == addSeedModal) {
@@ -22,8 +9,8 @@ window.onclick = function (event) {
     }
 }
 
+//Control for first visit pop-up
 window.onload = (event) => {
-    //sessionStorage.setItem('firstVisit', 'notvisited');
     if (!sessionStorage.getItem('firstVisit')) {
         welcomeModal.style.display = "block";
         sessionStorage.setItem('firstVisit', 'visited');
@@ -31,14 +18,15 @@ window.onload = (event) => {
 
 };
 
+//Successful Save Message on redirect to ?success
 const queryString = window.location.search;
 if (queryString == '?success') {
     alert('Location Saved');
     window.location.search = '';
 }
 
+//Map Init
 var mymap = L.map('mapid').setView([50.37039039587762, -4.142532348632813], 13);
-
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     maxZoom: 18,
     id: 'fooldome/ck0xrpybh0rzq1crp6narwuyl',
@@ -48,6 +36,7 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 }).addTo(mymap);
 
 
+//Populate Add Seed Form on Click
 var latField = document.querySelector('#latField');
 var lngField = document.querySelector('#lngField');
 var w3wField = document.querySelector('#w3wField');
@@ -55,7 +44,7 @@ var w3wField = document.querySelector('#w3wField');
 function onMapClick(e) {
     latField.value = e.latlng.lat;
     lngField.value = e.latlng.lng;
-
+    //Fetch form what 3 words api
     fetch(`https://api.what3words.com/v3/convert-to-3wa?coordinates=${e.latlng.lat}%2C${e.latlng.lng}&key=7144Y07L`)
         .then((response) => {
             return response.json();
@@ -182,6 +171,8 @@ fetch('/api/getHives').then((response) => {
     });
 })
 
+
+//Create Seed Shop Icons and GET from API
 var seedShop = L.icon({
     iconUrl: '../assets/img/seedShopIcons/seedShopIcon.png',
     iconSize: [52, 60],
@@ -197,6 +188,21 @@ fetch('/api/getSeedShops').then((response) => {
     });
 })
 
+//Layers Menu Controls
+
+var linksTrigger = document.querySelector('#linksTrigger');
+var links = document.querySelector('.links');
+linksTrigger.addEventListener('click', () => {
+    linksTrigger.classList.toggle('active');
+    links.classList.toggle('open');
+})
+
+var layerControls = document.querySelectorAll('.layerControl');
+layerControls.forEach(layerControl => {
+    layerControl.addEventListener('click', () => {
+        layerControl.classList.toggle('layerHidden');
+    })
+})
 
 const rewildingLayerControl = document.querySelector('#rewildingLayerControl');
 const hivesLayerControl = document.querySelector('#hivesLayerControl');
