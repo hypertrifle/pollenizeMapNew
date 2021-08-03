@@ -23,13 +23,13 @@ function getIconForLocation(location){
             {x: 50.36506290058305, y:-4.013304261775685},
             {x: 50.38007660496905, y:-4.023966083349215}
         ],{x:parseFloat(location.latitude),y:parseFloat(location.longitude)})){
-            return {icon: `../assets/img/vistry/seedPacket0.png`,iconSize:[100, 57]}
+            return {icon: '../assets/img/vistry/seedPacket0.png',iconSize:[100, 57]}
         }
     }
 
 
 
-    return {icon: `../assets/img/seedPacket0.png`,iconSize:[50, 57]}
+    return {icon: '../assets/img/seedPacket0.png',iconSize:[50, 57]}
 }
 
 
@@ -44,7 +44,7 @@ window.onclick = function (event) {
 }
 
 //Control for first visit pop-up
-window.onload = (event) => {
+window.onload = function(event)  {
     if (!sessionStorage.getItem('firstVisit')) {
         welcomeModal.style.display = "block";
         sessionStorage.setItem('firstVisit', 'visited');
@@ -80,11 +80,11 @@ function onMapClick(e) {
     latField.value = e.latlng.lat;
     lngField.value = e.latlng.lng;
     //Fetch form what 3 words api
-    fetch(`https://api.what3words.com/v3/convert-to-3wa?coordinates=${e.latlng.lat}%2C${e.latlng.lng}&key=7144Y07L`)
-        .then((response) => {
+    fetch('https://api.what3words.com/v3/convert-to-3wa?coordinates='+e.latlng.lat+'%2C$'+e.latlng.lng+'&key=7144Y07L')
+        .then(function(response) {
             return response.json();
         })
-        .then((myJson) => {
+        .then(function(myJson)  {
             w3wField.value = myJson.words;
         });
 
@@ -95,14 +95,14 @@ mymap.on('click', onMapClick);
 
 //Create Seed Pack Icons and GET from API
 
-fetch('/api/getMarkers').then((response) => {
+fetch('/api/getMarkers').then(function(response)  {
     return response.json();
-}).then((myJson) => {
-    myJson.forEach((loc) => {
-        var {icon, iconSize} = getIconForLocation(loc);
+}).then(function(myJson)  {
+    myJson.forEach(function(loc) {
+        var iconDetails = getIconForLocation(loc);
         var seedPacket = L.icon({
-            iconUrl: icon,
-            iconSize: iconSize,
+            iconUrl: iconDetails.icon,
+            iconSize: iconDetails.iconSize,
             className: 'rewildingSeedsLayer'
         });
 
@@ -173,10 +173,10 @@ var newIcon = L.icon({
     className: 'hivesLayer'
 });
 
-fetch('/api/getHives').then((response) => {
+fetch('/api/getHives').then(function(response)  {
     return response.json();
-}).then((myJson) => {
-    myJson.forEach((loc) => {
+}).then(function(myJson)  {
+    myJson.forEach(function(loc) {
         if (loc.icon === 'column') {
             L.marker([loc.latitude, loc.longitude], { icon: column }).addTo(mymap);
         } else if (loc.icon === 'genesis') {
@@ -215,10 +215,10 @@ var seedShop = L.icon({
     className: 'seedShopsLayer'
 });
 
-fetch('/api/getSeedShops').then((response) => {
+fetch('/api/getSeedShops').then(function(response)  {
     return response.json();
-}).then((myJson) => {
-    myJson.forEach((loc) => {
+}).then(function(myJson)  {
+    myJson.forEach(function(loc)  {
         console.log(loc);
         L.marker([loc.latitude, loc.longitude], { icon: seedShop }).addTo(mymap);
     });
@@ -228,14 +228,14 @@ fetch('/api/getSeedShops').then((response) => {
 
 var linksTrigger = document.querySelector('#linksTrigger');
 var links = document.querySelector('.links');
-linksTrigger.addEventListener('click', () => {
+linksTrigger.addEventListener('click', function()  {
     linksTrigger.classList.toggle('active');
     links.classList.toggle('open');
 })
 
 var layerControls = document.querySelectorAll('.layerControl');
-layerControls.forEach(layerControl => {
-    layerControl.addEventListener('click', () => {
+layerControls.forEach(layerControl, function() {
+    layerControl.addEventListener('click', function()  {
         layerControl.classList.toggle('layerHidden');
     })
 })
@@ -244,23 +244,23 @@ const rewildingLayerControl = document.querySelector('#rewildingLayerControl');
 const hivesLayerControl = document.querySelector('#hivesLayerControl');
 const seedShopsLayerControll = document.querySelector('#rewildingLayerControl');
 
-rewildingLayerControl.addEventListener('click', () => {
+rewildingLayerControl.addEventListener('click', function()  {
     var rewildingSeedsLayerMarkers = document.querySelectorAll('.rewildingSeedsLayer');
-    rewildingSeedsLayerMarkers.forEach(rewildingSeedsLayerMarker => {
+    rewildingSeedsLayerMarkers.forEach(rewildingSeedsLayerMarker, function() {
         rewildingSeedsLayerMarker.classList.toggle('hideLayer');
     })
 })
 
-hivesLayerControl.addEventListener('click', () => {
+hivesLayerControl.addEventListener('click', function()  {
     var hivesLayerMarkers = document.querySelectorAll('.hivesLayer');
-    hivesLayerMarkers.forEach(hivesLayerMarker => {
+    hivesLayerMarkers.forEach(hivesLayerMarker, function() {
         hivesLayerMarker.classList.toggle('hideLayer');
     })
 })
 
-seedShopsLayerControl.addEventListener('click', () => {
+seedShopsLayerControl.addEventListener('click', function()  {
     var seedShopsLayerMarkers = document.querySelectorAll('.seedShopsLayer');
-    seedShopsLayerMarkers.forEach(seedShopsLayerMarker => {
+    seedShopsLayerMarkers.forEach(seedShopsLayerMarker, function() {
         seedShopsLayerMarker.classList.toggle('hideLayer');
     })
 })
