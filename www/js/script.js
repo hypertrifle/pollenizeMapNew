@@ -99,7 +99,7 @@ fetch('/api/getMarkers').then((response) => {
     return response.json();
 }).then((myJson) => {
     myJson.forEach((loc) => {
-        var {icon, iconSize,layer} = getIconForLocation(loc);
+        var {icon, iconSize} = getIconForLocation(loc);
         var seedPacket = L.icon({
             iconUrl: icon,
             iconSize: iconSize,
