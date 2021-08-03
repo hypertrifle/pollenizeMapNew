@@ -1,5 +1,12 @@
 {{!-- Template for Map --}}
 <div class="container">
+    <div class="legend">
+        <div class="description">
+        <img class="sponsor-icon" src="assets/img/vistry-sponsor-icon.png"> Sponsored by
+        </div>
+        <img class="sponsor-logo" src="assets/img/vistry-sponsor-no-bg.png" alt="Sponsored by Vistry Partnership">
+
+    </div>
     <nav class="links">
         <img id="linksTrigger" src="assets/img/pollenizeLogoFull.png" alt="Pollenize Logo">
         <ul>
@@ -28,7 +35,7 @@
         <div class="welcomeModalText">
             <h2>Welcome to The Pollenize Rewilding Map</h2>
 
-            <p>Sow your 1m2 seed packet, which contains 18 different varieties of wildflowers.</p>
+            <p>Sow your 1m2 seed packet, which contains 70 different varieties of native wildflower.</p>
             <p>Click on the map to log your sowing co-ordinates!</p>
 
             <p>You can also use the menu in the bottom right corner to find locations of Pollenize Hives and Seed
@@ -58,7 +65,7 @@
                 <label for="whatThreeWords">What 3 Words</label>
                 <input name="whatThreeWords" id="w3wField" type="text">
             </div>
-            <div class="form-group">
+          {{!--   <div class="form-group">
                 <label for="seedPacketColor">Seed Packet Color</label>
 
                 <select name="seedPacketColor" id="seedPacketColor">
@@ -66,9 +73,11 @@
                     <option value="seedPacket2">Red</option>
                     <option value="seedPacket3">Purple</option>
                     <option value="seedPacket4">Blue</option>
-                </select>
+                </select> 
+</div>--}}
+                <input type="hidden" name="seedPacketColor" id="seedPacketColor" value="seedPacket1"/>
 
-            </div>
+            
             <div class="form-group">
                 <label for="seedPacketNumber">Seed Packet Number</label>
                 <input name="seedPacketNumber" id="seedPacketField" type="text">

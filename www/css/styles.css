@@ -37,6 +37,35 @@ body.admin{
     width: 100%;
 }
 
+.legend{
+    position: absolute;
+    z-index: 100;
+    top: 30px;
+    right: 10px;
+    display:flex;
+    flex-direction: column;
+    background:#fff;
+    border-radius:10px;
+    padding:10px;
+
+}
+
+.legend .sponsor-icon {
+    max-width:20px;
+}
+.legend .sponsor-logo {
+    max-width:120px;
+}
+
+.legend .description {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    font-size: 14px;
+    margin-bottom:10px;
+
+}
+
 .links{
     position: absolute;
     z-index: 100;

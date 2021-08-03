@@ -1,4 +1,38 @@
 
+//+ Jonas Raoni Soares Silva
+//@ http://jsfromhell.com/math/is-point-in-poly [rev. #0]
+
+function isPointInPoly(poly, pt){
+    for(var c = false, i = -1, l = poly.length, j = l - 1; ++i < l; j = i)
+        ((poly[i].y <= pt.y && pt.y < poly[j].y) || (poly[j].y <= pt.y && pt.y < poly[i].y))
+        && (pt.x < (poly[j].x - poly[i].x) * (pt.y - poly[i].y) / (poly[j].y - poly[i].y) + poly[i].x)
+        && (c = !c);
+    return c;
+}
+
+
+function getIconForLocation(location){
+
+    if(location.latitude && location.longitude){
+        //check resides with geo fence. this is the vistray boundries
+        if(isPointInPoly([
+           {x: 50.3771352438394, y: -4.048017492325089},
+            {x: 50.365603515737334, y:-4.065981969297147},
+            {x: 50.36234870952577, y:-4.05009856060597},
+            {x: 50.36098247105598, y:-4.036612576636438},
+            {x: 50.36506290058305, y:-4.013304261775685},
+            {x: 50.38007660496905, y:-4.023966083349215}
+        ],{x:parseFloat(location.latitude),y:parseFloat(location.longitude)})){
+            return {icon: `../assets/img/vistry/seedPacket0.png`,iconSize:[100, 57]}
+        }
+    }
+
+
+
+    return {icon: `../assets/img/seedPacket0.png`,iconSize:[50, 57]}
+}
+
+
 //Modal Control
 var addSeedModal = document.getElementById("addSeedModal");
 var welcomeModal = document.getElementById("welcomeModal");
@@ -36,6 +70,7 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 }).addTo(mymap);
 
 
+
 //Populate Add Seed Form on Click
 var latField = document.querySelector('#latField');
 var lngField = document.querySelector('#lngField');
@@ -64,9 +99,10 @@ fetch('/api/getMarkers').then((response) => {
     return response.json();
 }).then((myJson) => {
     myJson.forEach((loc) => {
+        var {icon, iconSize,layer} = getIconForLocation(loc);
         var seedPacket = L.icon({
-            iconUrl: `../assets/img/${loc.seedPacketColor}.png`,
-            iconSize: [50, 57],
+            iconUrl: icon,
+            iconSize: iconSize,
             className: 'rewildingSeedsLayer'
         });
 
