@@ -40,13 +40,19 @@ body.admin{
 .legend{
     position: absolute;
     z-index: 100;
-    top: 30px;
+    top: 10px;
     right: 10px;
     display:flex;
     flex-direction: column;
     background:#fff;
     border-radius:10px;
     padding:10px;
+
+
+    box-shadow: 0px 0px 27px -11px rgba(0,0,0,0.75);
+-webkit-box-shadow: 0px 0px 27px -11px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 0px 27px -11px rgba(0,0,0,0.75);
+
 
 }
 

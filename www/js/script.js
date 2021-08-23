@@ -93,9 +93,6 @@ function getIconForLocation(location){
             }
         }
     }
-
-
-
     return {icon: `../assets/img/seedPacket0.png`,iconSize:[50, 57]}
 }
 
